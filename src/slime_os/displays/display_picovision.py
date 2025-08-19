@@ -1,9 +1,9 @@
-from display_picovision import PicoVision, PEN_P5
+from picovision import PicoVision, PEN_P5
 
 
 class Display:
     def __init__(self, sos):
-        self.display = PicoVision(PEN_P5, 400, 240)
+        self.pv = PicoVision(PEN_P5, 400, 240)
         self.width = 400
         self.height = 240
 
@@ -11,22 +11,23 @@ class Display:
         pass
 
     def get_bounds(self, *args, **kwargs):
-        return self.display.get_bounds(*args, **kwargs)
+        return self.pv.get_bounds(*args, **kwargs)
 
     def update(self, *args, **kwargs):
-        return self.display.update(*args, **kwargs)
+        return self.pv.update(*args, **kwargs)
 
     def line(self, *args, **kwargs):
-        return self.display.line(*args, **kwargs)
+        return self.pv.line(*args, **kwargs)
 
     def pixel(self, *args, **kwargs):
-        return self.display.pixel(*args, **kwargs)
+        return self.pv.pixel(*args, **kwargs)
 
     def rectangle(self, *args, **kwargs):
-        return self.display.rectangle(*args, **kwargs)
+        return self.pv.rectangle(*args, **kwargs)
 
     def create_pen(self, *args, **kwargs):
-        return self.display.create_pen(*args, **kwargs)
+        return self.pv.create_pen(*args, **kwargs)
 
     def set_pen(self, *args, **kwargs):
-        return self.display.set_pen(*args, **kwargs)
+        return self.pv.set_pen(*args, **kwargs)
+

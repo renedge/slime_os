@@ -154,9 +154,9 @@ class App:
 
             is_temporary = "temporary" in app and app["temporary"] == True
             is_selected = app_index == sos.persist["launcher"]["selected_app"]
-            show_outline = is_selected
 
-            if show_outline:
+            if is_selected:
+                print(offset_x + 31, offset_y + 28, offset_x - 32, offset_y + 28)
                 gfx.line(
                     offset_x + 31, offset_y + 28, offset_x - 32, offset_y + 28, 3
                 )
@@ -190,7 +190,7 @@ class App:
 
             name_width = gfx.measure_text(app["name"], scale=1)
 
-            sos.gfx.text(app["name"], offset_x - 1 - (name_width // 2), offset_y + 14)
+            gfx.text(app["name"], offset_x - 1 - (name_width // 2), offset_y + 14)
 
             if "icon" in app:
                 size = -1
@@ -208,7 +208,7 @@ class App:
                         if bit == "1":
                             y = (bit_index // size) - size // 2
                             x = (bit_index % size) - size // 2
-                            sos.gfx.pixel(offset_x + x, offset_y + y)
+                            gfx.pixel(offset_x + x, offset_y + y)
 
     def do_download_play(self):
         uart = sos.get_expansion_uart()
@@ -307,11 +307,12 @@ class App:
                 [sos.keycode.ENTER, sos.keycode.LEFT_ARROW, sos.keycode.RIGHT_ARROW]
             )
 
-            if sos.keycode.LEFT_ARROW in keys:
+            # print(keys)
+            if keys.get(sos.keycode.LEFT_ARROW):
                 sos.persist["launcher"]["selected_app"] -= 1
-            if sos.keycode.RIGHT_ARROW in keys:
+            if keys.get(sos.keycode.RIGHT_ARROW):
                 sos.persist["launcher"]["selected_app"] += 1
-            if sos.keycode.ENTER in keys:
+            if keys.get(sos.keycode.ENTER):
                 yield sos.INTENT_REPLACE_APP(
                     self.apps[sos.persist["launcher"]["selected_app"]]
                 )

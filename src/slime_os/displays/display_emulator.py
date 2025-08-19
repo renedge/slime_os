@@ -1,15 +1,17 @@
 import pygame, sys
-
+from slime_os.keycode import Keycode
 
 class Display:
     def __init__(self, sos):
         pygame.init()
+
+        self.sos = sos
         self.width = 400
         self.height = 240
         self.pens = []
         self.pen = None
 
-        self.surface = pygame.display.set_mode((self.width, self.height))
+        self.surface = pygame.display.set_mode((self.width, self.height), pygame.SCALED)
         pygame.display.set_caption("Slime OS")
 
     def tick(self):
@@ -17,6 +19,10 @@ class Display:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self.sos["keyboard"].set_key_down(event.key)
+            elif event.type == pygame.KEYUP:
+                self.sos["keyboard"].set_key_up(event.key)
 
     def get_bounds(self, *args, **kwargs):
         return (self.width, self.height)
@@ -27,12 +33,8 @@ class Display:
     def line(self, x1, y1, x2, y2, thickness):
         pygame.draw.line(self.surface, self.pen, (x1, y1), (x2, y2), thickness)
 
-    def text(self, text, x, y, scale, angle):
-        # return self.display.line(*args, **kwargs)
-        print(text, x, y)
-
     def pixel(self, x, y):
-        pygame.draw.set_at(self.surface, (x, y), self.pen)
+        self.surface.set_at((x, y), self.pen)
 
     def rectangle(self, x, y, w, h):
         pygame.draw.rect(self.surface, self.pen, pygame.Rect(x, y, w, h))

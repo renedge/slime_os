@@ -12,7 +12,7 @@ config = {
         "grey": (100, 100, 100),
         "yellow": (184, 184, 0),
     },
-    "display": {"flipped": True},
+    "display": {"flipped": False},
     "modules": {
         "keyboard": Keyboard,
         "display": Display,

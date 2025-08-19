@@ -9,7 +9,6 @@ class Hardware:
         self.SPI = {}
         self.os = OS()
         self.gc = GC()
-        self.sdcard = SDCard()
         self.open = _open
 
     def get_expansion_adc(self):
@@ -37,12 +36,6 @@ class OS:
     def stat(self, filename):
         filename = toEmulatorPath(filename)
         return os.stat(filename)
-
-
-class SDCard:
-    def get_sdcard(self):
-        return None
-
 
 class GC:
     def collect(self):

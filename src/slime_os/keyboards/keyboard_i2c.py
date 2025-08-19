@@ -1,7 +1,7 @@
 from machine import Pin, I2C
 
 from slime_os.keycode import Keycode
-import slime_os.external.mcp23017 as mcp23017
+import slime_os.libraries.mcp23017 as mcp23017
 
 kbd_map = {
     "13x12": Keycode.Q,
@@ -57,7 +57,7 @@ for key, value in kbd_map.items():
 
 class Keyboard:
     def __init__(self, sos):
-        i2c = sos.get_internal_i2c()
+        i2c = sos["get_internal_i2c"]()
         self.is_ready = False
         try:
             mcp = mcp23017.MCP23017(i2c, 0x20)

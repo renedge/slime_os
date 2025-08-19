@@ -1,3 +1,5 @@
+import sys
+
 import slime_os.launcher
 from slime_os.graphics import *
 from slime_os.expansion import *
@@ -36,6 +38,9 @@ def get_applications() -> list[dict[str, str, str]]:
     global app
 
     app_dir = "apps"
+
+    if app_dir not in sys.path:
+        sys.path.append(app_dir)
 
     app_files = hardware.os.listdir(app_dir)
     download_play_app = TMP_DOWNLOAD_PLAY_APP
@@ -83,12 +88,12 @@ def get_applications() -> list[dict[str, str, str]]:
 
 hardware = config["modules"]["hardware"](locals())
 display = config["modules"]["display"](locals())
-graphics = Gfx(display)
+graphics = Gfx(locals())
 keyboard = config["modules"]["keyboard"](locals())
 ctrl = Ctrl(locals())
 
-sd = hardware.sdcard.get_sdcard()
-hardware.os.mount(sd, "/sd")
+# sd = get_sdcard()
+# hardware.os.mount(sd, "/sd")
 
 persist = {}
 
@@ -133,15 +138,16 @@ def boot(next_app):
 
         if is_intent(intent, INTENT_FLIP_BUFFER):
             graphics.set_pen(config["theme"]["black"])
-            graphics.rectangle(0, 0, display.width, 40)
+            graphics.rectangle(0, display.height-40, display.width, 40)
             graphics.set_pen(config["theme"]["white"])
-            graphics.line(display.width - 12, 40, display.width - 12 - 120, 40)
-            graphics.line(0 + 12, 40, 0 + 12 + 120, 40)
+            graphics.line(display.width - 12, display.height-40, display.width - 12 - 120, display.height - 40)
+            graphics.line(0 + 12, display.height-40, 0 + 12 + 120, display.height - 40)
 
             window_title = "SLIMEDECK ZERO"
 
-            graphics.text(window_title, display.width - 12 - 10, 31, -1, 1, 180)
-            graphics.text(free(), 0 + 12 + 86, 31, -1, 1, 180)
+            graphics.text(window_title, 14, display.height-31, -1, 1, 180)
+            free_text = free()
+            graphics.text(free_text, display.width-14-graphics.measure_text(free_text), display.height-31, -1, 1, 180)
             graphics.update()
 
 

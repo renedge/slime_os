@@ -1,4 +1,5 @@
 from machine import Pin, I2C, UART, SPI
+import os
 import sdcard
 
 
@@ -11,6 +12,7 @@ class Hardware:
         self.sdcard = sdcard
         self.open = open
         self._adc_enabled = False
+        self.os = os
         self._sos = sos
 
     def get_expansion_adc(self):

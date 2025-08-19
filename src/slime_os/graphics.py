@@ -1,12 +1,15 @@
+import json
+
 from config import config
 
-
 class Gfx:
-    def __init__(self, display):
-        self.display = display
-        self.dw, self.dh = display.get_bounds()
+    def __init__(self, sos):
+        self.display = sos["display"]
+        self.dw, self.dh = self.display.get_bounds()
 
         self.is_flipped = config["display"]["flipped"]
+        with sos["hardware"].open("slime_os/monospace.font.json", "r") as f:
+            self.font = json.load(f)
 
     def set_pen(self, *args, **kwargs):
         self.display.set_pen(*args, **kwargs)
@@ -49,21 +52,37 @@ class Gfx:
 
     def text(self, *args, **kwargs):
         text = args[0]
-        x = args[1]
-        y = args[2]
-        x = self._adjust_x(x)
-        y = self._adjust_y(y)
+        ox = args[1]
+        oy = args[2]
 
-        angle = 0
-        scale = kwargs["scale"] if "scale" in kwargs else 1
-        if self.is_flipped:
-            angle = 180
-            x -= scale
-            y -= 0
-        self.display.text(text, x, y, scale=scale, angle=angle)
+        x_step = self.font["glyph_width"] + 1
+        y_step = self.font["glyph_height"] + 1
+
+        for line_y, line in enumerate(text.split("\n")):
+            for letter_x, letter in enumerate(line):
+                lines = self.font["ops"][letter]["lines"]
+                pixels = self.font["ops"][letter]["pixels"]
+
+                for line in lines:
+                    [x1, y, x2] = line
+                    x1 += ox + (letter_x*x_step)
+                    y += oy + (line_y*y_step)
+                    x2 += ox + (letter_x*x_step)
+                    fx1 = self._adjust_x(x1)
+                    fx2 = self._adjust_x(x2)
+                    fy = self._adjust_y(y)
+                    self.display.line(fx1, fy, fx2, fy, 1)
+
+                for pixel in pixels:
+                    [x, y] = pixel
+                    x += ox + (letter_x*x_step)
+                    y += oy + (line_y*y_step)
+                    fx = self._adjust_x(x)
+                    fy = self._adjust_y(y)
+                    self.display.pixel(fx, fy)
 
     def measure_text(self, text, scale=1):
-        return self.display.measure_text(text, scale)
+        return ((len(text) * (self.font["glyph_width"] + 1)) - 1) * scale
 
     def update(self):
         return self.display.update()
