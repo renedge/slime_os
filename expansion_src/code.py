@@ -39,7 +39,7 @@ def run(app_data):
       elif data_string == "[sos].app":
         uart.write(bytes(f"[sos].app:yes:{len(app_data)}", "ascii"))
         send_large_string(uart, app_data)
-        uart.write(bytes("[\sos].app:yes\n", "ascii"))
+        uart.write(bytes("[\ssrc].app:yes\n", "ascii"))
       else:
         print(data_string)
 

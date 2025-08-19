@@ -1,0 +1,50 @@
+{
+	"$baseURI": "https://yal.cc/r/20/pixelfont/",
+	"$version": "1.0",
+	"in-glyphs": [
+		" ABCDEFGHIJKLMNOPQRS",
+		"TUVWXYZabcdefghijklm",
+		"nopqrstuvwxyz0123456",
+		"789!\"#$%&'()*+,-./:;",
+		"<=>?@[\\]^_`{|}~"
+	],
+	"glyph-color": "auto",
+	"in-kerning": [
+		""
+	],
+	"glyph-width": 5,
+	"glyph-height": 7,
+	"glyph-ofs-x": 0,
+	"glyph-ofs-y": 0,
+	"glyph-sep-x": 1,
+	"glyph-sep-y": 1,
+	"glyph-base-x": 0,
+	"glyph-baseline": 6,
+	"glyph-spacing": 1,
+	"font-is-mono": true,
+	"font-em-square": 900,
+	"font-line-gap": 200,
+	"font-ascend": 600,
+	"font-descend": -100,
+	"font-px-size": 100,
+	"font-name": "Carrie Micro",
+	"font-author": "musthbly",
+	"font-copy": "",
+	"font-version": "0.1",
+	"font-desc": "",
+	"font-license": "CC0-1.0",
+	"font-license-url": "https://creativecommons.org/publicdomain/zero/1.0/",
+	"font-sample-text": "The quick brown fox jumps over the lazy dog.",
+	"font-preview-text": [
+		"//  The five boxing wizards jump",
+		"#include <stdio.h> // <= quickly.",
+		"int main(int argc, char **argv) {",
+		"  float il1[]={1-2/3.4,5+6==7/8};",
+		"  int OxFaced=0xBAD||\"[{(CQUINE\";",
+		"  unsigned O0,l1,Z2,S5,G6,B8__XY;",
+		"  printf(\"@$Hamburgefo%c`\",'\\n');",
+		"  return ~7&8^9?0:l1|!\"j->k+=*w\";",
+		"}",
+		""
+	]
+}

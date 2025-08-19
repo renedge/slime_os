@@ -17,7 +17,7 @@ Slime OS runs in a limited 32-color mode with a 400x240 internal resolution whic
 
 ### Making apps
 
-Please refer to an [example app](/src/flashlight_app.py) for boiler plate.
+Please refer to an [example app](/src/apps/flashlight_app.py) for boiler plate.
 
 Slime OS includes various libraries which are used internally but may also be helpful when making apps.
 
@@ -32,7 +32,7 @@ import slime_os as sos
 | [sos.gfx](/src/slime_os/graphics.py)  | Drawing methods including shapes, text, and other utilities.  |
 | [sos.intents](/src/slime_os/intents.py)  | Intents are used to send signals from an app to the OS, including quitting the app, swapping apps, or flipping the frame buffer.  |
 | [sos.ctrl](/src/slime_os/expansion.py)  | Controller for identifying expansions. |
-| [sos.kbd](/src/slime_os/keyboard_i2c.py)  | Keyboard instance for reading buttons. |
+| [sos.kbd](/src/slime_os/keyboards/keyboard_i2c.py)  | Keyboard instance for reading buttons. |
 
 ### Issues
 
@@ -72,6 +72,6 @@ Although the plan is to eventually support various resistor values for different
 
 ## License
 
-This software is licensed as MIT.
-
-App icons are from [PiiiXL on Itch.io](https://piiixl.itch.io/mega-1-bit-icons-bundle) and are licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en)
+Software: MIT
+App Icons: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.en) - [PiiiXL on Itch.io](https://piiixl.itch.io/mega-1-bit-icons-bundle)
+Carrie Micro Font: CC0 1.0 Universal - [musthbly on Itch.io(https://musthbly.itch.io/carrie-micro)

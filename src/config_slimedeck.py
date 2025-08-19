@@ -1,6 +1,6 @@
-from slime_os.keyboards.keyboard_emulator import Keyboard
-from slime_os.displays.display_emulator import Display
-from slime_os.hardware.emulator import Hardware
+from slime_os.keyboards.keyboard_i2c import Keyboard
+from slime_os.displays.display_picovision import Display
+from slime_os.hardware.micropython import Hardware
 
 config = {
     "theme": {
